@@ -1,0 +1,188 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.menu{
+    height: 50px;
+    background-color: #eceff1;
+}
+.menu-header-list{
+    display: flex;
+    justify-content: space-evenly;
+}
+.menu-header-list li{
+    font-size: 20px;
+    padding-top: 15px;
+    
+}
+.menu-header-list li a{
+    color: #333;
+    font-weight: 700;
+}
+.burger-menu{
+    display: none;
+}
+@media(max-width: 768px){
+    .menu{
+        display: none;
+    }
+    .burger-menu{
+        display: block;
+    }
+    #menu-toggle{
+        opacity: 0;
+    }
+    .menu-btn{
+        display: flex;
+        align-items: center;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        width: 26px;
+        height: 26px;
+        cursor: pointer;
+        z-index: 99;
+    }
+    .menu-btn > span, .menu-btn > span::before, .menu-btn > span::after{
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background-color: #616161;
+    }
+    .menu-btn > span::before{
+        content: "";
+        top: -8px;
+    }
+    .menu-btn > span::after{
+        content: ""; 
+        top: 8px;
+    }
+    .menu-box-list{
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        visibility: hidden;
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 80px 0;
+        list-style: none;
+        text-align: center;
+        background-color: #eceff1;
+        box-shadow: 1px 0px 6px rgba(0, 0, 0, 0.2);
+        animation: wipe-out-top-left;
+        animation-duration: 1s;
+    }
+    .menu-item{
+        display: block;
+        padding: 12px 24px;
+        color: #333;
+        font-size: 20px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ;
+    }
+    .menu-item:hover{
+        background: #cfd8dc;
+    }
+    #menu-toggle:checked ~ .menu-btn > span{
+        top: 8;
+       transform: rotate(45deg);
+    }
+    #menu-toggle:checked ~ .menu-btn > span::before{
+        top: 0;
+       transform: rotate(0deg);
+    }
+    #menu-toggle:checked ~ .menu-btn > span::after{
+        top: 0;
+        transform: rotate(90deg);
+    }
+    #menu-toggle:checked ~ .menu-box-list{
+        visibility: visible;
+        top: 0;
+        left: 0;
+        animation: wipe-in-bottom-right;
+        animation-duration: 0.3s;
+        animation-timing-function: 0.3s;
+    }
+    .menu-btn > span, .menu-btn > span:before, .menu-btn > span::after{
+        transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    .menu-box-list{
+        transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    .menu-item{
+        transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+}
+@keyframes wipe-out-top-left {
+    from {
+      clip-path: polygon(-50% 0%, 200% 0, 0 200%, 0 -50%);
+    }
+    to {
+      clip-path: polygon(0 0, 0 0, 0 0, 0 50%);
+    }
+  }
+  
+  [transition-style="out:wipe:top-left"] {
+    animation: 0.3s cubic-bezier(.25, 1, .30, 1) wipe-out-top-left both;
+  }
+@keyframes circle-in-top-left {
+    from {
+      clip-path: circle(0%);
+    }
+    to {
+      clip-path: circle(150% at top left);
+    }
+  }
+  
+  [transition-style="in:circle:top-left"] {
+    animation: 2.5s cubic-bezier(.25, 1, .30, 1) circle-in-top-left both;
+  }
+
+  @keyframes circle-out-top-left {
+    from {
+      clip-path: circle(125%);
+    }
+    to {
+      clip-path: circle(0% at top left);
+    }
+  }
+  
+  [transition-style="out:circle:top-left"] {
+    animation: 2.5s cubic-bezier(.25, 1, .30, 1) circle-out-top-left both;
+  }
+  @keyframes diamond-in-hesitate {
+    0% {
+      clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+    }
+    50% {
+      clip-path: polygon(45% 50%, 50% 25%, 55% 50%, 50% 75%);
+    }
+    100% {
+      clip-path: polygon(-50% 50%, 50% -50%, 150% 50%, 50% 150%);
+    }
+  }
+  
+  [transition-style="in:diamond:hesitate"] {
+    animation: 1.5s cubic-bezier(.25, 1, .30, 1) diamond-in-hesitate both;
+  }
+  @keyframes wipe-in-bottom-right {
+    from {
+      clip-path: polygon(0 0, 0 0, 0 0, 0 50%);
+    }
+    to {
+      clip-path: polygon(-50% 0%, 200% 0, 0 200%, 0 -50%);
+    }
+  }
+  
+  [transition-style="in:wipe:bottom-right"] {
+    animation: 2.5s cubic-bezier(.25, 1, .30, 1) wipe-in-bottom-right both;
+  }
